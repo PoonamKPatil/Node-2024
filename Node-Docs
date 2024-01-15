@@ -1,0 +1,8 @@
+-> Every browser has inbuilt engine to compile js code to machine code (chrome uses v8)
+-> Node js : environment to run JS outside of the browser
+build on top of v8 engine
+
+in built modules:
+OS
+Path
+Http
