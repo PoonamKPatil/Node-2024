@@ -2,7 +2,69 @@
 -> Node js : environment to run JS outside of the browser
 build on top of v8 engine
 
-in built modules:
-OS
-Path
-Http
+//globals
+__dirname
+__filename
+
+//in-built modules:
+os : os related info
+path : file path
+http  : htpp server req/res
+fs for file system operations
+
+//npm
+npm init 
+npm init -y //default init
+npm i packagename //local install
+npm i --save-dev packagename //dev=dependency
+npm i -g packagename //global
+
+
+//event loop
+To avoid blocking, JavaScript uses an event loop to handle asynchronous operations. The event loop is essentially a loop that runs continuously and checks for tasks that are waiting to be executed. These tasks are added to a queue, and the event loop runs through the queue, executing each task in order.
+
+Async code is offloaded
+
+in node to perform nonblocking IOs
+->eventloop is c program as part of libuv
+
+Queues:
+1. timer queues (settimeout/setinterval callbacks)
+2. I/O queue (fs, IO callbacks)
+3. check queue (setimmediate callback)
+4. close queue (close handlers)
+center : 
+* microtask queue
+    1. nexttick queue (process.nexttick)
+    2. promises
+
+
+Execution order:
+-> sync js code takes priority over async code
+-> and when callstack empty, then only event loop runs/comes in picture
+steps of execution
+1. Callbacks in Microtask queue executed (first : nexttick, second: promises)
+2. All Callbacks in timer queue executed
+3. if callback present in MTQ executed, first nexttick then promises (after all timer cb done)
+4. All callbacks I/O executed
+5. if callback present in MTQ executed, first nexttick then promises (after all I/O cb done)
+6. All callbacks in check queue executed 
+7. if callback present in MTQ executed, first nexttick then promises (after all check queue cb done)
+8. All the callbacks in close queue executed
+9. final time : if callback present in MTQ executed, first nexttick then promises
+
+
+and this loop continues
+experiments:
+1. sync code takes proprity over async code
+2. all callbacks in nexttick queue executed before cbs in promises queue
+3. callbacks in MTQ executed before callbacks in timer queue
+4. callbacks in MTQ exected inbetween execution of timer callbacks queue
+    after every callback execution , event loop checks back MTQ
+5. timer queues callbacks executed in FIFO order
+6. callbacks in MTQ executed before callbacks in I/O queue
+7. when running settimeout with 0ms with IO async method, order of execution is not guranteed
+
+
+I/O polling
+I/O events are polled and cb are added in I/O queue only when I/O is completed
