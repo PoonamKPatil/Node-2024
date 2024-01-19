@@ -1,0 +1,36 @@
+// --> nested callbacks functions leads to callback hell
+// --> to prevent callback hell , we use promises
+// --> further better version is to use async await pattern
+
+// 1) await is always used inside async only
+// 2) await invokerfunction()
+//     -> here invokerfunction contains promise (resolve, reject) code which is created manually or other already created promises example (fetch,axios method)
+
+const res = async () => {
+    try {
+        const data = await testfunc()
+    } catch (err) {
+        //log errror
+    }
+}
+
+const testfunction = () => {
+    return new Promise(resolve, reject) => {
+        readFile(path, 'utf8', (err, result) => {
+            if (err) {
+                reject(err)
+            }
+            resolve(result)
+        })
+    }
+}
+
+// ORR
+
+const res = async () => {
+    try {
+        const data = await axios(url)
+    } catch (err) {
+        //log errror
+    }
+}

@@ -2,7 +2,7 @@ const {readFile, writeFile} = require('fs')
 
 
 //callback hell
-const first = readFile('./content-folder/subfolder/test.txt', 'utf8', (err, result) => {
+const first = readFile('./content-folder/subfolder/first.txt', 'utf8', (err, result) => {
     if (err) {
         console.log(err);
         return;

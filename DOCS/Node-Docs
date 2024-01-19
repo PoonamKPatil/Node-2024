@@ -1,0 +1,20 @@
+-> Every browser has inbuilt engine to compile js code to machine code (chrome uses v8)
+-> Node js : environment to run JS outside of the browser
+build on top of v8 engine
+
+//globals
+__dirname
+__filename
+
+//in-built modules:
+os : os related info
+path : file path
+http  : htpp server req/res
+fs for file system operations
+
+//npm
+npm init 
+npm init -y //default init
+npm i packagename //local install
+npm i --save-dev packagename //dev=dependency
+npm i -g packagename //global

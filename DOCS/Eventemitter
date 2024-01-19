@@ -1,0 +1,11 @@
+on and emit method from events module
+
+on method -> listens to events
+emit method -> emits events which need to be responded back
+
+const EventEmitter = require('events')
+const customeEmitter = new EventEmitter()
+customeEmitter.on('response' , (name, id ) => {
+    console.log("data received")
+    console.log(`${name} ${id}`)
+})
